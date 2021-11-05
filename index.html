@@ -1,0 +1,731 @@
+<!DOCTYPE html>
+<html>
+   <head>
+      <meta charset="utf-8">
+      <title>Генератор NPC для Мышинной стражи</title>
+      <script>
+         /*
+            Генератор персонажа НРИ Мышинная стража
+            По всем замечаниям и предложениям comat0zz@gmail.com
+         */
+
+         var sex = {
+            0: "Женский",
+            1: "Мужской"
+         };         
+
+         var names = {
+            1: Array("Абрам","Энгус","Аэдэн","Аэрэн","Эйрлфрид","Аластер","Альгомин","Алистер","Аллин","Альтон","Амсон","Анкур","Ардин","Аркин","Аргус","Болдуин","Бардрик","Барон","Бастиан","Байден","Биган","Бедвин","Бенн","Беннетт","Бер","Билл","Блэкбур","Бовен","Брэм","Марка","Каделл","Кейл","Кейли","Резчик","Пещера","Седрик","Келеван","Крис","Чаунси","Чилтон","Кристофер","Кларк","Клиффорд","Коннор","Корналл","Курт","Даин","Далтон","Дэймон","Дарроу","Дейли","Делвин","Эдрик","Эдви","Элимис","Эрнест","Эрролл","Эрвинн","Юинг","Эвин","Фаброн","Файракс","Фарамонд","Фаррер","Фаолан","Фолкнер","Фиган","Фентон","Ферис","Финн","Финбар","Пихта","Фолкер","Фидор","Файф","Гамлион","Гарнер","Гарнье","Гарнизон","Гарроу","Гэри","Гэвин","Геррит","Гилл","Гилмур","Годвинн","Горынь","Грэхем","Грегор","Гуннар","Герни","Хагген","Хечетт","Хакетт","Ханниди","Гарольд","Хенсон","Хоган","Холтон","Инграм","Израиль","Якоб","Джаспер","Джефф","Иеремия","Джозеф","Джошуа","Юлиан","Кензи","Коле","Конрад","Кудьярд","Кайл","Линч","Лари","Лестер","Лиам","Локк","Лукас","Линдон","Маркус","Мартин","Maccrea","Мерек","Мерритт","Полночь","Натаниэль","Никлас","Найджел","Ноэлан","Норруин","Омарр","Оррен","Отон","Осрик","Освальд","Оуайн","Павел","Пирс","Педер","Квентин","Куигли","Рэнди","Рагнье","Похть","Руперт","Рорк","Ройбин","Райлан","Самуэль","Саксонский","Сефат","Секст","Сейт","Шейн","Сайлас","Сильфано","Симон","Слун","Тандер","Фаддей","Тан","Том","Тристан","Четверг","Тимук","Тоби","Тревор","Тристрам","Тук","Тайнан","Вон","Вернон","Видар","Винсон","Волкер","Уолдон","Валмонд","Вят"),
+            0: Array("Эбигейл","Адель","Уинсли","Эллисон","Альма","Энн","Аннис","Анника","Обри","Осень","Эйнсли","Бэйли","Белла","Бонни","Шиповник","Бронуин","Колючка","Брунн","Кейтлин","Калла","Карвин","Кэли","Кайлин","Сеара","Чистотел","Ческа","Челси","Гвоздика","Daewn","Далия","Дара","Даяна","Дэй","Дорис","Эда","Эланора","Элли","Эм","Феруин","Цветок","Гейл","Женевра","Гвендолин","Холли","Ильза","Ингрид","Изабель","Ивонн","Плющ","Янн","Дженни","Жозефина","Юлия","июнь","Кэтлин","Кейтлинн","Кира","Келли","Кемь","Ландра","Лариа","Лавр","Лия","Лейт","Ленокс","Лилли","Линь","Лунис","Лоралай","Лоралин","Лоретта","Линеа","Лира","Майрен","Майрин","Марен","Марин","Маура","Майя","Мэй","Мика","Миллисент","Мира","Мойра","Миси","Нэнси","Николл","Нола","Оделл","Оделла","Олетт","Омайра","Ориана","Пим","Пайпер","Куинн","Куинла","Райна","Рона","Розали","Розалия","Сэди","Шафран","Сэйбл","Сина","Кина","Виера","Села","Серра","Сиенна","Шивилла","Сильвия","Тарин","Тора","Тинки","Вейл","Вейра","Вейга","Вилди")
+         };
+
+         // Цвет плаща
+         var color_cloak = Array("красный", "зеленый", "синий", "желтый", "розовый", "черный", "белый", "серый", "фиолетовый", "оранжевый", "серебрянный", "золотой", "персиковый", "мятный", "травяной", "голубой", "коричневый", "карминовый", "салатовый", "вишневый", "льяной", "сливовый");
+         // Полутон плаща
+         var color_tone = Array("светло-", "тёмно-", "красно-", "рыже-", "серо-", "ярко-", "тускло-", "кремово-", "сине-", "насыщенный ", "пастельно-", "");
+         // Цвет шкуры мыши
+         var color_fur = Array("коричневая", "русая", "серая", "чёрная", "рыжая", "белая");
+         // Полутон шкуры
+         var color_fur_tone = Array("светло-", "тёмно-", "");
+
+         // Страница 309
+         // skills id:count|id:count|...
+         var mouse_rang = {
+            0: {"name": "Лапа помощи", "ageFrom": 14, "ageTo": 17, "will": 2, "health": 6, "skills": "26:2|27:2|29:2", "knowledge": 1, "res": 1, "con": 1},  
+            1: {"name": "Страж", "ageFrom": 18, "ageTo": 25, "will": 3, "health": 5, "skills": "3:3|26:2|29:3|30:2|33:2", "knowledge": 1, "res": 2, "con": 2},
+            2: {"name": "Лидер патруля", "ageFrom": 21, "ageTo": 60, "will": 5, "health": 4, "skills": "3:3|6:2|7:2|15:2|19:3|21:2|26:2|29:3|30:3", "knowledge": 3, "res": 4, "con": 3},
+            3: {"name": "Капитан стражи", "ageFrom": 41, "ageTo": 60, "will": 6, "health": 3, "skills": "1:3|3:3|4:3|7:2|12:2|15:3|17:2|19:3|26:3|29:3|30:3", "knowledge": 4, "res": 5, "con": 4},
+            4: {"name": "Патрульный", "ageFrom": 21, "ageTo": 50, "will": 4, "health": 4, "skills": "3:3|12:2|15:2|19:3|24:2|26:2|29:2|30:2", "knowledge": 2, "res": 3, "con":  3}
+         };
+
+         var cities = {
+            0: { "name": "Древоград", "skills": [5, 23, 31], "traits": [15] },
+            1: { "name": "Кремнержавь", "skills": [11, 27], "traits": [2, 37] },
+            2: { "name": "Локхэйвен", "skills": [18, 32], "traits": [11, 54] },
+            3: { "name": "Меднолесье", "skills": [11, 33], "traits": [25] },
+            4: { "name": "Моховяз", "skills": [23, 28], "traits": [1] },
+            5: { "name": "Песчаный дом", "skills": [15, 31], "traits": [40, 44] },
+            6: { "name": "Плющи", "skills": [20, 28], "traits": [47] },
+            7: { "name": "Подъельник", "skills": [6, 34], "traits": [12, 36] },
+            8: { "name": "Порт-Сумах", "skills": [10, 15], "traits": [17, 21] },
+            9: { "name": "Сланцевая нора", "skills": [8, 14, 28], "traits": [30] },
+            10: { "name": "Травоозёрье", "skills": [4, 16], "traits": [14, 33] },
+            11: { "name": "Виндзельм", "skills": [], "traits": [] },
+            12: { "name": "Волчий Клык", "skills": [], "traits": [] },
+            13: { "name": "Гальбрук", "skills": [], "traits": [] },
+            14: { "name": "Гилов Обет", "skills": [], "traits": [] },
+            15: { "name": "Доридар", "skills": [], "traits": [] },
+            16: { "name": "Железнолесье", "skills": [], "traits": [] },
+            17: { "name": "Зябкий", "skills": [], "traits": [] },
+            18: { "name": "Калогеро", "skills": [], "traits": [] },
+            19: { "name": "Камнекрепь", "skills": [], "traits": [] },
+            20: { "name": "Кленовая Гавань", "skills": [], "traits": [] },
+            21: { "name": "Корневал", "skills": [], "traits": [] },
+            22: { "name": "Ржаволист", "skills": [], "traits": [] },
+            23: { "name": "Темноводье", "skills": [], "traits": [] },
+            24: { "name": "Чёрный Утёс", "skills": [], "traits": [] },
+            25: { "name": "Яблочный Дом", "skills": [], "traits": [] },
+            26: { "name": "Белая Сосна", "skills": [], "traits": [] },
+            27: { "name": "Берёзовый Поток", "skills": [], "traits": [] },
+            28: { "name": "Вязолесье", "skills": [], "traits": [] },
+            29: { "name": "Разнотрав", "skills": [], "traits": [] },
+            30: { "name": "Дубовый Гай", "skills": [], "traits": [] },
+            31: { "name": "Рассветная Скала", "skills": [], "traits": [] },
+            32: { "name": "Одинокая Сосна", "skills": [], "traits": [] },
+            33: { "name": "Роща Лилли", "skills": [], "traits": [] },
+            34: { "name": "Свиль", "skills": [], "traits": [] },
+            35: { "name": "Чертополохи", "skills": [], "traits": [] }
+         };
+
+         var traits = {
+            1: "Бдительный",
+            2: "Безрассудный",
+            3: "Бестрашный",
+            4: "Большелапый",
+            5: "Боязливый",
+            6: "Вдумчивый",
+            7: "Волчий нюх",
+            8: "Высокий",
+            9: "Грациозный",
+            10: "Длиннохвостый",
+            11: "Доверие Стражи",
+            12: "Дотошный",
+            13: "Жаворонок",
+            14: "Защитник",
+            15: "Золотые лапы",
+            16: "Зоркий",
+            17: "Крепкий",
+            18: "Лидер",
+            19: "Любопытный",
+            20: "Мелкий",
+            21: "Метеочувствительный",
+            22: "Мудрый",
+            23: "Невинный",
+            24: "Недоверчивый",
+            25: "Независимый",
+            26: "Непреклонный",
+            27: "Острозубый",
+            28: "Острый слух",
+            29: "Отзывчивый",
+            30: "Открытый",
+            31: "Пессимист",
+            32: "Покрытый шрамами",
+            33: "Проворный",
+            34: "Путешественник",
+            35: "Пылкий",
+            36: "Рациональный",
+            37: "Решительный",
+            38: "Седошкурый",
+            39: "Скептичный",
+            40: "Сова",
+            41: "Сообразительный",
+            42: "Спокойный",
+            43: "Телохранитель",
+            44: "Тихий",
+            45: "Толстый",
+            46: "Топографический кретин",
+            47: "Трудолюбивый",
+            48: "Умный",
+            49: "Упрямый",
+            50: "Хитрый",
+            51: "Храбрый",
+            52: "Худой",
+            53: "Чёрствый",
+            54: "Щедрый",
+            55: "Экстраверт",
+            56: "Юный",
+            57: "Стойкий" 
+         };
+
+         var skills = {
+            1: "Администратор",
+            2: "Архивариус",
+            3: "Боец",
+            4: "Военный",
+            5: "Гончар",
+            6: "Знаток зверей",
+            7: "Инструктор",
+            8: "Каменщик",
+            9: "Картограф",
+            10: "Корабел",
+            11: "Кузнец",
+            12: "Лекарь",
+            13: "Манипулятор",
+            14: "Мельник",
+            15: "Наблюдатель за погодой",
+            16: "Насекомовод",
+            17: "Оратор",
+            18: "Оружейник",
+            19: "Охотник",
+            20: "Пекарь",
+            21: "Переговорщик",
+            22: "Пивовар",
+            23: "Плотник",
+            24: "Повар",
+            25: "Пчеловод",
+            26: "Разведчик",
+            27: "Разнорабочий",
+            28: "Сборщик",
+            29: "Следопыт",
+            30: "Специалист по выживанию",
+            31: "Стекольщик",
+            32: "Ткач",
+            33: "Торгаш",
+            34: "Учёный"
+         };
+
+      var equip_combat = Array();
+
+      var equip_any = Array();
+
+      var knowledges = Array("безделушках и украшениях", "болотах", "внезапных паводках", "войне", "восстаниях", "высокой траве", "голоде", "границе", "грозах", "грязи", "дефиците", "дикой стране", "диче", "дождях", "дорогах", "ездовых животных", "ежевике", "засухе", "звездах", "зерне", "змеях", "каменистой местности", "ласках", "лесе", "лесных пожарах", "ловушках", "льде", "маршрутах", "медицине", "метелях", "мхе", "морозах", "наплывах жары", "не по сезону теплой погоде", "ночном времени суток", "оружии и броне", "орехах", "осенних грозах", "открытой местности", "палой листве", "птицах", "подлеске", "побережьях", "праздниках", "преступности", "прибрежных водах", "приливах и отливах", "прудах и озерах", "почте", "пчеловодстве", "растениеводстве", "реках и ручьях", "ремесленниках", "рецептах", "ручном труде", "сильном похолодании", "следах", "снегопадах", "снежных бурях", "снежном покрове", "сопровождении", "Тёмном Вереске", "тёплой и жаркой погоде", "травах", "транспортных средствах", "тумане", "туннелях", "укрытиях", "урожае", "хищниках", "холоде", "обморожении", "шипах и колючках", "щетках и кистях", "щитах", "эпидемиях", "ядах", "ясной и теплой погоде");
+
+      var knowledges_tenderpaw = Array("Кодексе Стражи", "Сказания о Страже");
+      var knowledges_captain = Array("Локхейвене", "Матриархе Стражи"); 
+
+      var 
+         parents_expirence = Array(2, 5, 8, 9, 11, 10, 14, 16, 18, 20, 22, 23, 25, 28, 31, 32)
+         persuasion_experience = Array(13, 17, 21),
+         master_experience = Array(2, 5, 8, 9, 11, 12, 14, 16, 18, 20, 22, 23, 24, 25, 27, 28, 31, 32),
+         mentor_experience = Array(3, 7, 12, 15, 19, 26, 29, 30),
+         unispec_experience = Array(3, 7, 12, 15, 19, 26, 29, 30),
+         traits_parents = Array(3, 4, 5, 7, 8, 9, 10, 13, 14, 17, 19, 20, 24, 25, 27, 28, 29, 30, 32, 33, 34, 35, 37, 39, 41, 42, 44, 46, 52, 47, 48, 49, 51, 54, 55),
+         life_path = Array(1, 3, 5, 6, 12, 13, 14, 15, 16, 17, 18, 19, 21, 22, 26, 29, 31, 32, 34, 36, 38, 39, 40, 42, 57, 43, 44, 52, 48, 50, 51, 52);
+
+      function getRandomIntInclusive(min, max) {
+           min = Math.ceil(min);
+           max = Math.floor(max);
+        return Math.floor(Math.random() * (max - min + 1)) + min; 
+      };
+
+      function genColorTone(c, t) {
+         var 
+            gC = c[getRandomIntInclusive(0, c.length - 1)],
+            gT = t[getRandomIntInclusive(0, t.length - 1)],
+            result = gT + gC;
+
+            return result.charAt(0).toUpperCase() + result.slice(1);                 
+      }
+
+      function generate() {
+         
+         [].forEach.call(document.querySelectorAll('.isHide'), function (el) {
+               el.style.visibility = 'visible';
+         });
+
+         var
+            gPercentGuard = 20,
+            gPercentAlive = 5,
+            mouse_health,
+            mouse_will,
+            gSex = getRandomIntInclusive(0, 1),
+            gNameIndex = getRandomIntInclusive(0, names[gSex].length - 1),
+            gName = names[gSex][gNameIndex],
+            gColorFur = genColorTone(color_fur, color_fur_tone),
+            gRang = "Горожанин",
+            gCityIndex = getRandomIntInclusive(0, Object.keys(cities).length - 1),
+            gCityItem = cities[gCityIndex],
+            gColorCloak = " — ";
+
+         document.getElementById("mouse_name").textContent = gName;
+         document.getElementById("mouse_city").textContent = gCityItem.name;
+         document.getElementById("mouse_sex").textContent = sex[gSex];
+         document.getElementById("mouse_color_fur").textContent = gColorFur;
+
+         var 
+            pFatherId = getRandomIntInclusive(0, Object.keys(names[1]).length - 1),
+            pMatherId = getRandomIntInclusive(0, Object.keys(names[0]).length - 1),
+            parents = names[1][pFatherId] + " и " + names[0][pMatherId];
+
+         var 
+            sexMasterId = getRandomIntInclusive(0, 1),
+            sexMentorId = getRandomIntInclusive(0, 1),
+            masterId = getRandomIntInclusive(0, Object.keys(names[sexMasterId]).length - 1),
+            mentorId = getRandomIntInclusive(0, Object.keys(names[sexMentorId]).length - 1),
+            masterContent = names[sexMasterId][masterId]
+            mentorContent = names[sexMentorId][mentorId];
+
+         var isAlive = getRandomIntInclusive(1, 100);
+         if (isAlive <= gPercentAlive) {
+            aliveText = "Нет"
+         }else{
+            aliveText = "Да"
+         }
+
+         document.getElementById("mouse_alive").textContent = aliveText;
+
+         var 
+            charSkills = {},
+            charTraits = {};
+         
+         if(gCityItem.skills.length > 0) {
+            var
+               city_skill_index = getRandomIntInclusive(0, gCityItem.skills.length - 1),
+               city_skill_id = gCityItem.skills[city_skill_index];
+         }else{
+            var
+               city_skill_id = getRandomIntInclusive(1, Object.keys(skills).length);
+         }
+         
+         if (gCityItem.traits.length > 0) {
+            var 
+               tCityIndex = getRandomIntInclusive(0, Object.keys(gCityItem.traits).length - 1),
+               tCityId = gCityItem.traits[tCityIndex];
+
+            charTraits[traits[tCityId]] = 1;
+         } else {
+            var 
+               tCityId = getRandomIntInclusive(1, Object.keys(traits).length);
+
+            charTraits[traits[tCityId]] = 1;
+         }
+
+         console.log("Черта города: ", traits[tCityId], " = 1");
+
+         //charTraits[gCityItem.traits]
+
+         if(Object.keys(charSkills).indexOf( skills[city_skill_id] ) != -1) {
+            charSkills[skills[city_skill_id]] += 1;
+         }else{
+            charSkills[skills[city_skill_id]] = 2;
+         }
+
+         console.log("Навык города: ", skills[city_skill_id], " = ", charSkills[skills[city_skill_id]]);
+
+
+         // gPercentGuard - что встретим кого-то из стражи, остальные - горожане 
+         // #guardgen - хештег для перехода быстро по коду :)
+         var 
+            // Связи и ресурсы для NPC, для стражи отдельно
+            mouse_resources = getRandomIntInclusive(1, 5),
+            mouse_circles = getRandomIntInclusive(1, 5),
+            mouse_knowledges = [],
+
+            chanceRang = getRandomIntInclusive(1, 100); 
+         if(chanceRang <= gPercentGuard) {
+            
+            var 
+               rangId = getRandomIntInclusive(0, Object.keys(mouse_rang).length - 1),
+               gRang = mouse_rang[rangId].name,
+               guard_age = getRandomIntInclusive(mouse_rang[rangId].ageFrom, mouse_rang[rangId].ageTo)
+
+
+            mouse_health = mouse_rang[rangId].health;
+            mouse_will = mouse_rang[rangId].will;
+            mouse_resources = mouse_rang[rangId].res;
+            mouse_circles = mouse_rang[rangId].con;
+
+            document.getElementById("mouse_age").textContent = guard_age;
+
+            // у лап помощи нет плащей
+            if(rangId > 0) {
+               gColorCloak = genColorTone(color_cloak, color_tone);
+               
+               if(rangId == 3) {
+                  mouseKnwldIndex = getRandomIntInclusive(0, Object.keys(knowledges_tenderpaw).length - 1);
+                  mouse_knowledges.push(knowledges_captain[mouseKnwldIndex]);
+                  mouse_rang[rangId].knowledge -= 1;   
+               }
+
+               while(mouse_rang[rangId].knowledge > 0) {
+
+                  mouseKnwldIndex = getRandomIntInclusive(0, Object.keys(knowledges).length - 1);
+                  knwlgd = knowledges[mouseKnwldIndex];
+                  if(mouse_knowledges.indexOf( knwlgd ) == -1){
+                     mouse_knowledges.push(knwlgd);
+                     mouse_rang[rangId].knowledge -= 1;
+                  }                     
+               }
+
+            }else{
+               // Но появляется черта от родителей, стр 319
+               var 
+                  parentTraitIndex = getRandomIntInclusive(0, Object.keys(traits_parents).length - 1),
+                  parentTraitId = traits_parents[parentTraitIndex],
+                  parentTrait = traits[parentTraitId];
+
+                  if(Object.keys(charTraits).indexOf( parentTrait ) != -1) {
+                     charTraits[parentTrait] += 1;
+                  }else{
+                     charTraits[parentTrait] = 1;
+                  };
+
+                  console.log("Черта от родителей: ", parentTrait, " = ", charTraits[parentTrait]);
+
+                  mouseKnwldIndex = getRandomIntInclusive(0, Object.keys(knowledges_tenderpaw).length - 1);
+                  mouse_knowledges.push(knowledges_tenderpaw[mouseKnwldIndex]);    
+            };
+
+            // Жизнь в пути, стр 319
+            if([2, 3].indexOf( rangId ) > -1) {
+                  
+               var 
+                  lifePathIndex = getRandomIntInclusive(0, Object.keys(life_path).length - 1),
+                  lifePathId = life_path[lifePathIndex],
+                  lifePathName = traits[lifePathId];
+
+               if(Object.keys(charTraits).indexOf( lifePathName ) != -1) {
+                  charTraits[lifePathName] += 1;
+               }else{
+                  charTraits[lifePathName] = 1;
+               };
+
+               console.log("Черта от Жизнь в пути: ", lifePathName, " = ", charTraits[lifePathName]);
+            };
+
+            // Пересобираем скилы
+            mouse_skills_sign = mouse_rang[rangId].skills;
+            mouse_skills_sign = mouse_skills_sign.split("|");
+
+            for(var i=0; i < mouse_skills_sign.length; i++) {
+
+               var 
+                  mss = mouse_skills_sign[i].split(":"),
+                  msId = parseInt(mss[0]),
+                  msCount = parseInt(mss[1]),
+                  msSkill = skills[msId];
+
+                  if(Object.keys(charSkills).indexOf( msSkill ) != -1) {
+                     charSkills[msSkill] += msCount;
+                  }else{
+                     charSkills[msSkill] = msCount;
+                  }
+
+                  console.log("Пересобираем скилы: ", msSkill, " = ", charSkills[msSkill]);
+            };
+
+            // Жизненный опыт, стр 312
+            var 
+               lifeCount = ([0, 3].indexOf( rangId ) != -1)?2:1,
+               lifeArray = [],
+               life_id;
+            // думал вначале просто два раза дернуть, но могут быть одинаковые
+            // перепроверять на дубли не хочется, или дергать срезами
+            while(lifeCount > 0) {
+
+               life_id = getRandomIntInclusive(1, Object.keys(skills).length);
+
+               if (lifeArray.indexOf( life_id ) == -1) {
+                  lifeCount -= 1;
+                  lifeArray.push(life_id);
+                  lifeSkill = skills[life_id];
+
+                  if(Object.keys(charSkills).indexOf( lifeSkill ) != -1) {
+                     charSkills[lifeSkill] += 1;
+                  }else{
+                     charSkills[lifeSkill] = 2;
+                  }
+
+                  console.log("Жизненный опыт: ", lifeSkill, " = ", charSkills[lifeSkill]);
+               }
+            }
+
+            // Навыки убеждения, стр 312 
+            var 
+               persCount = ([2, 3].indexOf( rangId ) != -1)?2:1,
+               persArray = [],
+               pers_id, pers_index, persSkill;
+
+            while(persCount > 0) {
+
+               pers_index = getRandomIntInclusive(0, persuasion_experience.length - 1);
+               pers_id = persuasion_experience[pers_index];
+      
+               if (persArray.indexOf( pers_id ) == -1) {
+                  persCount -= 1;
+                  persArray.push(pers_id);
+                  persSkill = skills[pers_id];
+      
+                  if(Object.keys(charSkills).indexOf( persSkill ) != -1) {
+                     charSkills[persSkill] += 1;
+                  }else{
+                     charSkills[persSkill] = 2;
+                  }
+
+                  console.log("Навык убеждения: ", persSkill, " = ", charSkills[persSkill]);
+               }
+            }
+
+            // Навык мастера 
+            var 
+               mExpId = getRandomIntInclusive(0, master_experience.length - 1),
+               mSkill = skills[master_experience[mExpId]];
+            
+            if(Object.keys(charSkills).indexOf( mSkill ) != -1) {
+               charSkills[mSkill] += 1;
+            }else{
+               charSkills[mSkill] = 2;
+            };
+
+            console.log("Навык мастера: ", mSkill, " = ", charSkills[mSkill]);
+
+            masterContent = masterContent + " ( " + mSkill + " )";
+
+            // Навык наставника
+            var 
+               mentCount = (rangId == 2 )?2:1,
+               mentArray = [],
+               ment_id, ment_index, mentSkill;
+
+            while(mentCount > 0) {
+
+               ment_index = getRandomIntInclusive(0, mentor_experience.length - 1);
+               ment_id = mentor_experience[ment_index];
+      
+               if (mentArray.indexOf( ment_id ) == -1) {
+                  mentCount -= 1;
+                  mentArray.push(ment_id);
+                  mentSkill = skills[ment_id];
+                  
+                  if(Object.keys(charSkills).indexOf( mentSkill ) != -1) {
+                     charSkills[mentSkill] += 1;
+                  }else{
+                     charSkills[mentSkill] = 2;
+                  }
+
+                  console.log("Навык наставника: ", mentSkill, " = ", charSkills[mentSkill]);
+               }
+            }
+
+            mentorContent = mentorContent + " ( " + mentorContent + " )";
+            
+            // Специализация 
+            var 
+               unispecCount = ([1, 2, 3, 4].indexOf( rangId ) != -1)?1:0,
+               unispecArray = [],
+               unispec_id, unispec_index, unispecSkill;
+
+            while(unispecCount > 0) {
+
+               unispec_index = getRandomIntInclusive(0, unispec_experience.length - 1);
+               unispec_id = unispec_experience[unispec_index];
+      
+               if (unispecArray.indexOf( unispec_id ) == -1) {
+                  unispecCount -= 1;
+                  unispecArray.push(unispec_id);
+                  unispecSkill = skills[unispec_id];
+      
+                  if(Object.keys(charSkills).indexOf( unispecSkill ) != -1) {
+                     charSkills[unispecSkill] += 1;
+                  }else{
+                     charSkills[unispecSkill] = 2;
+                  }
+
+                  console.log("Специализация: ", unispecSkill, " = ", charSkills[unispecSkill]);
+               }
+            }
+
+
+
+         } else {
+            document.getElementById("mouse_age").textContent = getRandomIntInclusive(14, 80);
+
+            // Уберем горожанину плащ, мастера, наставника и ранг
+            [].forEach.call(document.querySelectorAll('.isHide'), function (el) {
+               el.style.visibility = 'hidden';
+            });
+
+            var rnd = getRandomIntInclusive(2, 6);
+            mouse_health = rnd;
+            mouse_will = 8 - rnd;
+
+            mouseKnwldIndex = getRandomIntInclusive(0, Object.keys(knowledges).length - 1);
+            mouse_knowledges.push(knowledges[mouseKnwldIndex]);
+         }
+
+         // Вопросы природы
+         // Если 0, манипулируем природой
+         var
+            mouse_nature = 3; 
+         
+         var 
+            question_1 = Array(0, 2, 54, 56),
+            q1 = getRandomIntInclusive(0, Object.keys(question_1).length - 1),
+            q1Value = question_1[q1];
+
+         if(q1Value == 0) {
+            mouse_nature += 1;
+         } else {
+            charTraits[traits[q1Value]] = 1;
+
+            console.log("Черта из первого вопроса: ", traits[q1Value], " = ", charTraits[traits[q1Value]]);
+         }
+
+         var 
+            isEscape = getRandomIntInclusive(0, 1);
+
+         if (isEscape == 1) {
+            mouse_nature += 1;
+
+            if ( Object.keys(charSkills).indexOf(skills[3]) != -1 ) {
+               charSkills[skills[3]] -= 1;
+               console.log("Понижение Бойца на 1: ", charSkills[skills[3]])
+            }
+         }
+
+         var 
+            question_3 = Array(0, 3, 51);
+            q3 = getRandomIntInclusive(0, Object.keys(question_3).length - 1),
+            q3Value = question_3[q3];
+
+         if (q3Value > 0) {
+            charTraits[traits[q3Value]] = 1;
+            console.log("Черта из третьего вопроса: ", traits[q3Value], " = ", charTraits[traits[q3Value]]);
+         } else {
+            mouse_nature += 1;
+         }
+
+         document.getElementById("mouse_health").textContent = mouse_health;
+         document.getElementById("mouse_will").textContent = mouse_will;
+         document.getElementById("mouse_nature").textContent = mouse_nature;
+
+         // parents expirence
+         var 
+            pExpId = getRandomIntInclusive(0, parents_expirence.length - 1),
+            pSkill = skills[parents_expirence[pExpId]];
+
+         if(Object.keys(charSkills).indexOf( pSkill ) != -1) {
+            charSkills[pSkill] += 1;
+         }else{
+            charSkills[pSkill] = 2;
+         };
+
+         parents = parents + " ( " + pSkill + " )";
+
+         console.log("Навык родителей: ", pSkill, " = ", charSkills[pSkill]);
+
+         // Черта с которой родился
+         var 
+            traitBornIndex = getRandomIntInclusive(0, Object.keys(traits).length - 1),
+            traitBornId = Object.keys(traits)[traitBornIndex],
+            traitBorn = traits[traitBornId];
+
+         if(Object.keys(charTraits).indexOf( traitBorn ) != -1) {
+            charTraits[traitBorn] += 1;
+         }else{
+            charTraits[traitBorn] = 1;
+         }
+
+         console.log("Черта с которой родился: ", traitBorn, " = ", charTraits[traitBorn]);
+
+
+         document.getElementById("mouse_color_cloak").textContent = gColorCloak;
+         document.getElementById("mouse_rang").textContent = gRang;
+
+         var 
+            mouse_skills_text = "",
+            mouse_traits_text = "";
+
+         for (const [key, value] of Object.entries(charSkills)) {
+           mouse_skills_text += ` ${key} (${value}),`;
+         };
+
+         document.getElementById("mouse_skills").textContent = mouse_skills_text.slice(0, -1);
+
+         for (const [key, value] of Object.entries(charTraits)) {
+           mouse_traits_text += ` ${key} (${value}),`;
+         };
+
+         document.getElementById("mouse_traits").textContent = mouse_traits_text.slice(0, -1);
+
+         document.getElementById("mouse_master").textContent = masterContent;
+         document.getElementById("mouse_mentor").textContent = mentorContent;
+         document.getElementById("mouse_parents").textContent = parents;
+
+         document.getElementById("mouse_circles").textContent = mouse_circles;
+         document.getElementById("mouse_resources").textContent = mouse_resources;
+
+         mouse_knowledges = mouse_knowledges.join(', ');
+
+         document.getElementById("mouse_knowledge").textContent = mouse_knowledges;
+
+
+         // Я не знаю почему, но стилями не работает, потому костыль.
+         var 
+            table = document.getElementById("mouse_info");
+            table.style.fontWeight = 600;
+         var spans = table.getElementsByTagName("span");
+         for(var i=0, l = spans.length; i<l; i++) {
+           spans[i].style.fontWeight = 400;
+         };
+         
+         document.getElementById("isGuard").textContent = gPercentGuard + "%";
+         document.getElementById("isAlive").textContent = gPercentAlive + "%";
+      }
+      </script>
+   </head>
+   <body onload="generate()">
+            <table id="mouse_info">
+               <tr>
+                  <td colspan="2" id="mouse_name" style="text-align: center;"></td>
+               </tr>
+               <tr>
+                  <td>Пол: <span id="mouse_sex"></span></td>
+                  <td>Возраст: <span id="mouse_age"></span></td>
+               </tr>
+               <tr>
+                  <td>Дом: <span id="mouse_city"></span></td>
+                  <td>Родители: <span id="mouse_parents"></span></td>
+               </tr>
+               <tr>
+                  <td>Цвет меха: <span id="mouse_color_fur"></span></td>
+                  <td>Жив: <span id="mouse_alive"></span></td>
+               </tr>
+               <tr class="isHide">
+                  <td>Ранг: <span id="mouse_rang"></span></td>
+                  <td>Наставник: <span id="mouse_mentor"></span></td>
+               </tr>
+               <tr class="isHide">
+                  <td>Цвет плаща: <span id="mouse_color_cloak"></span></td>
+                  <td>Мастер: <span id="mouse_master"></span></td>
+               </tr>
+               <tr>
+                  <td colspan="2"><hr></td>                  
+               </tr>
+               <tr>
+                  <td colspan="2">Навыки: <span id="mouse_skills"></span></td>
+               </tr>
+               <tr>
+                  <td colspan="2">Черты характера: <span id="mouse_traits"></span></td>                  
+               </tr>
+               <tr>
+                  <td colspan="2" style="display:none">Снаряжение: <span id="mouse_equip">непонятно пока, как корректно его выдавать, сделаю в будущем</span></td>                  
+               </tr>
+               <tr>
+                  <td colspan="2">Знания о: <span id="mouse_knowledge"></span></td>                  
+               </tr>
+               <tr>
+                  <td colspan="2"><hr></td>                  
+               </tr>
+               <tr>
+                  <td>Природа: <span id="mouse_nature"></span></td>
+                  <td>Ресурсы: <span id="mouse_resources"></span></td>
+               </tr>
+               <tr>
+                  <td>Здоровье: <span id="mouse_health"></span></td>
+                  <td>Связи: <span id="mouse_circles"></span></td>
+               </tr>
+               <tr>
+                  <td>Воля: <span id="mouse_will"></span></td>
+                  <td><span id="mouse_no"></span></td>
+               </tr>
+               <tr>
+                  <td colspan="2"><hr></td>                  
+               </tr>
+               <tr>
+                  <td colspan="2">
+                     <p style="font-weight: normal;">
+                        При расчетах учитывается:<br>
+                        <b id="isGuard"></b> что является стражником<br>
+                        <b id="isAlive"></b> что персонаж умер<br>
+                        Также навыки и черты в зависимости от города, если город не имеет навыков или черт, то берется рандомно по списку.<br>
+                        Количество навыков и возраст формируется в завиcимоти от ранга, родителей и тп, по корнику.<br> 
+                     </p>
+                  </td>
+               </tr>
+               <tr>
+                  <td colspan="2" style="text-align: center;"><input type="button" name="run" onclick="javascript:generate()" value="Сгенерировать" /></td>
+               </tr>
+            </table>
+   </body>
+</html>
